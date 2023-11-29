@@ -14,6 +14,11 @@
     margin-left: 0.5rem;
 }
 
+.logo img {
+    width: 290px;
+    height: 48px;
+ }
+
 /* Navigation styles */
 ul {
     list-style: none;
