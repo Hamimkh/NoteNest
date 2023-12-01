@@ -32,7 +32,7 @@
             </div>
         </nav>
     </header>
-
+    
     <main>
         <div id="notes-container">
             <div class="card custom-card m-2" style="width: 12rem; height: 15rem;">
@@ -42,8 +42,11 @@
                     <span style="text-align: center; font-weight: 700;"> Create New Note</span>
                 </div>
             </div>
+            <div id="notes-display"></div>
         </div>
     </main>
+    
+
 
     <footer style=" position: absolute; bottom: 1rem; left: 0; width: 100vw;">
         <hr> &copy; 2023 Notenest by Shamim Hossain. All rights reserved.
@@ -67,7 +70,7 @@
                             <label for="noteContent" class="form-label">Description</label>
                             <textarea class="form-control" id="noteContent" rows="3"></textarea>
                         </div>
-                        <button type="button" class="btn btn-success">Add note</button>
+                        <button type="button" id="addNoteBtn" class="btn btn-success">Add note</button>
                     </form>
                 </div>
             </div>

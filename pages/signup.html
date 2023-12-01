@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="./authenticate.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous" defer></script>
     <title>NoteNest-Signup</title>
 </head>
 <body>
@@ -14,8 +16,8 @@
     <div class="authenticate-container">
         <img src="../images/logo.png" alt="">
 
-        <h1>Sign Up</h1>
-        <hr style="border: 1px solid white; width: 100%;">
+        <h1 class="authenticate-head">Sign Up</h1>
+        <hr class="line">
 
         <form class="authenticate-form" action="#" method="POST" id="signupForm">
 
@@ -24,17 +26,13 @@
             <input type="password" id="password" name="password" placeholder="Password" autocomplete="new-password" required>
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" required>
 
-            <button type="button" onclick="signup()">Sign Up</button>
+            <button type="button" class="authenticate-btn" onclick="signup()">Sign Up</button>
             <span style="color: white;"> 
                 Already have an account?
             </span>
             <a href="./login.html" style="color: rgb(111, 215, 62);">Login</a>
         </form>
         <script src="../script.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous" defer></script>
-
     </div>
 </section>
     
