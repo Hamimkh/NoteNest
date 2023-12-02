@@ -73,6 +73,12 @@ ul li {
 
 #notes-container {
   display: flex;
+  flex-wrap: wrap;
+}
+
+#notes-display, #added-notes {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .custom-card:hover {
