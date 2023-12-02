@@ -1,12 +1,15 @@
 import React from 'react';
 import "./Authenticate.css";
 import logo from "./images/logo.png"
+import { Link } from "react-router-dom";
+import bg from "./images/signup-bg.jpg"
+
 
 function Signup() {
   return (
     <>
     <section>
-    <div className="authenticate-container">
+    <div className="authenticate-container" style={{backgroundImage:`${bg}`}}>
         <img src={logo} alt=""/>
 
         <h1 className="authenticate-head">Sign Up</h1>
@@ -23,9 +26,9 @@ function Signup() {
             Sign Up
           </button>
           <span style={{ color: 'white' }}>Already have an account?</span>
-          <a href="./login.html" style={{ color: 'rgb(111, 215, 62)' }}>
+          <Link to="./signup" style={{ color: 'rgb(111, 215, 62)' }}>
             Login
-          </a>
+          </Link>
         </form>
       </div>
       </section>

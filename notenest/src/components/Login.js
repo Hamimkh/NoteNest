@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './images/logo.png';
 import './Authenticate.css';
+import { Link } from "react-router-dom";
+
 
 function Login() {
   return (
@@ -19,9 +21,9 @@ function Login() {
               Login
             </button>
             <span style={{ color: 'white' }}>Don't have an account?</span>
-            <a href="./signup.html" style={{ color: 'rgb(111, 215, 62)' }}>
+            <Link to="./login" style={{ color: 'rgb(111, 215, 62)' }}>
               Signup
-            </a>
+            </Link>
           </form>
         </div>
       </section>

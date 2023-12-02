@@ -16,7 +16,9 @@
 
 .logo img {
     width: 290px;
-    height: 48px;
+    height: 45px;
+    margin-top: 0rem;
+
  }
 
 /* Navigation styles */
