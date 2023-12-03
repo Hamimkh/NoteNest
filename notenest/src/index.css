@@ -11,3 +11,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.custom-card:hover {
+  background-color: rgb(244, 249, 244);
+}
+
+.custom-card-body {
+  display: flex;
+  flex-direction: column;
+}
