@@ -1,0 +1,63 @@
+/* Body style */
+.container {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Nova Square';
+    align-items: center;
+  }
+
+  .container-title {
+    font-family: 'Nova Square';
+    font-weight: bold;
+    font-size: 3rem;
+    margin: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .container-para {
+    font-size: 1.5rem;
+    line-height: 0.8;
+  }
+
+  .container-btn {
+    text-decoration: none;
+    margin: 1rem;
+    color: white;
+    font-weight: bold;
+    background-color: rgb(111, 215, 62);
+    padding: 1rem;
+    border-radius: 5px;
+    width: 18rem;
+    text-align: center;
+  }
+
+   .container-btn:hover {
+    background-color: rgb(86, 157, 16);
+
+  } 
+
+  /* lower section style */
+
+  .lower-container {
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    align-items: center;
+    font-family: 'Nova Square';
+  }
+
+  .lower-container-title {
+    font-weight: bold;
+    font-size: 2.5rem;
+    margin: 1rem;
+  }
+
+  .lower-container-para {
+    font-size: 1.5rem;
+  }
+
+  ol li {
+    font-size: 1.2rem;
+    line-height: 2;
+  }

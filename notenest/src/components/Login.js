@@ -21,7 +21,7 @@ function Login() {
               Login
             </button>
             <span style={{ color: 'white' }}>Don't have an account?</span>
-            <Link to="./login" style={{ color: 'rgb(111, 215, 62)' }}>
+            <Link to="../signup" style={{ color: 'rgb(111, 215, 62)' }}>
               Signup
             </Link>
           </form>
