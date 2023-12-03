@@ -13,9 +13,10 @@ const NotesSchema = new Schema({
     type: String,
     required: true,
   },
-  sharedWith: [{ 
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User" }],
+
+  // sharedWith: [{ 
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User" }],
     
   date: {
     type: Date,

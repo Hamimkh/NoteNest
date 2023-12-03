@@ -1,14 +1,14 @@
 import React from 'react'
 
 function Noteitems(props) {
-    const { note } = props;
+    const { note, updateNote } = props;
 
   return (
     <>
       <div id="notes-container">
           <div  className="card custom-card m-2" style={{ width: '12rem', height: '15rem' }}>
             <div className='card-icon'>
-          <i className="fa-solid fa-edit mx-2" style={{fontSize: "1rem", marginLeft: "1rem", color: "green", width:"2rem", cursor:"pointer"}}></i>
+          <i className="fa-solid fa-edit mx-2" onClick={()=>{updateNote(note)}} style={{fontSize: "1rem", marginLeft: "1rem", color: "green", width:"2rem", cursor:"pointer"}} ></i>
           <i className="fa-solid fa-trash mx-2" style={{fontSize: "1rem", marginLeft: "1rem", color: "green", width:"2rem", cursor:"pointer"}}></i>
           <i className="fa-solid fa-share mx-2" style={{fontSize: "1rem", marginLeft: "1rem", color: "green", width:"2rem", cursor:"pointer"}}></i>
           </div>
