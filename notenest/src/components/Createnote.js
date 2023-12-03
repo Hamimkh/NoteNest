@@ -1,6 +1,21 @@
-import React from 'react'
+import React, { useContext, useState } from "react";
+import Notecontext from "../context/notes/NoteContext";
 
 function Createnote() {
+  const context = useContext(Notecontext);
+  const { addNote } = context;
+
+  const [note, setNote] = useState({title: "", description: ""});
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addNote(note.title, note.description);
+    setNote({title: "", description: "",});
+  };
+  const handleChange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
   return (
     <>
       <div id="notes-container">
@@ -14,23 +29,29 @@ function Createnote() {
         </div>  
 
         {/* Modal */}
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                ...
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add note</button>
-              </div>
+        <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel">
+        <div className="modal-dialog">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Create New Note</h5>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                    <form onSubmit={handleSubmit}> 
+                        <div className="mb-3">
+                            <label htmlFor="title" className="form-label">Title</label>
+                            <input type="text" id="text" name="title" value={note.title} className="form-control"  onChange={handleChange} />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Description</label>
+                            <textarea type="text" id="description" name="description" value={note.description} className="form-control" onChange={handleChange}  rows="3"></textarea>
+                        </div>
+                        <button type="submit" className="btn btn-success">Add note</button>
+                    </form>
+                </div>
             </div>
-          </div>
         </div>
+    </div>
     </>
   )
 }
