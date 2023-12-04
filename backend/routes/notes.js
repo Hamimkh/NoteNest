@@ -105,44 +105,45 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
   }
 });
 
+// Route-5: Share a note with another user using POST: "/api/notes/sharenote/:id". Login required.
+router.post("/sharenote/:id", fetchuser, async (req, res) => {
+  const { email } = req.body;
 
-// // Route-5: Share a note with another user using POST: "/api/notes/sharenote/:id". Login required.
-// router.post('/sharenote/:id', fetchuser, async (req, res) => {
-//   const { sharedUserId } = req.body;
+  try {
+    const note = await Notes.findById(req.params.id);
 
-//   try {
-//     // Find the note to be shared
-//     const note = await Notes.findById(req.params.id);
+    if (!note) {
+      return res.status(404).json({ error: "Note not found" });
+    }
 
-//     if (!note) {
-//       return res.status(404).json({ error: 'Note not found' });
-//     }
+    // Check if the note is owned by the logged-in user
+    if (note.user.toString() !== req.user.id) {
+      return res
+        .status(401)
+        .json({ error: "Not allowed to share this note" });
+    }
 
-//     // Check if the user trying to share the note is the owner of the note
-//     if (note.user.toString() !== req.user.id) {
-//       return res.status(401).json({ error: 'Not allowed' });
-//     }
+    // Find the user by email and add their ID to the note's sharedWith array
+    const sharedUser = await User.findOne({ email });
+    if (!sharedUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
 
-//     // Check if the user to be shared with exists
-//     const sharedUser = await User.findById(sharedUserId);
-//     if (!sharedUser) {
-//       return res.status(404).json({ error: 'User not found' });
-//     }
+    note.sharedWith.push(sharedUser._id);
 
-//     // Check if the note is already shared with the user
-//     if (note.sharedWith.includes(sharedUserId)) {
-//       return res.status(400).json({ error: 'Note already shared with this user' });
-//     }
+    // Save the updated note
+    await note.save();
 
-//     // Share the note with the user
-//     note.sharedWith.push(sharedUserId);
-//     await note.save();
+    res.json({
+      message: "Note shared successfully",
+      sharedWith: note.sharedWith,
+    });
+  } catch (error) {
+    console.error("Error sharing note:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
 
-//     res.json({ message: 'Note shared successfully', note });
-//   } catch (error) {
-//     console.error('Error sharing note:', error);
-//     res.status(500).json({ error: 'Server error' });
-//   }
-// });
+
 
 module.exports = router;

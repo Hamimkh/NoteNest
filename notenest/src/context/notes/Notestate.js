@@ -82,8 +82,32 @@ const editNote = async (id, title, description) => {
     setNotes(newNotes)
   }
 
+  // Share note
+  const shareNote = async (id, email) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/notes/sharenote/${id}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'auth-token': localStorage.getItem('authtoken'),
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+      const json = await response.json();
+      console.log(json);
+      // Handle success or error as needed
+    } catch (error) {
+      console.error('Error sharing note:', error);
+      // Handle error
+    }
+  };
+  
+
 return (
-    <NoteContext.Provider value={{ notes, getNotes, addNote, editNote, deleteNote }}>
+    <NoteContext.Provider value={{ notes, getNotes, addNote, editNote, deleteNote, shareNote }}>
       {props.children}
     </NoteContext.Provider>
   )

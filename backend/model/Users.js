@@ -15,6 +15,13 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+
+    sharedWith: [
+        {
+          type: String,
+        },
+      ],
+
     date:{
         type: Date,
         default: Date.now

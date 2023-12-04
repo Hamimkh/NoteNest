@@ -43,7 +43,7 @@ function Login() {
 
           <form className="authenticate-form" onSubmit={handleSubmit}>
             <input type="email" id="email" name="email"  onChange={handleChange} placeholder="Email" required />
-            <input type="password" id="password" name="password"  onChange={handleChange} placeholder="Password" required />
+            <input type="password" id="password" name="password" current-password="autocomplete" onChange={handleChange} placeholder="Password" required />
             <button type="submit" className="authenticate-btn">
               Login
             </button>
