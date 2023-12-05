@@ -6,19 +6,19 @@ const ShareSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-
     receiver_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
-
+    note_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "notes"
+    },
     Sharenote: {
         type: String,
         required: true
     }
-  },
-
-  {timestamps: true});
+}, { timestamps: true });
 
   const Share = mongoose.model('Shared-Note', ShareSchema);
   module.exports = Share;

@@ -5,7 +5,8 @@ import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Userlayout from './components/Userlayout';
-import NoteState from './context/notes/Notestate';
+import NoteState from './context/notes/NoteContext';
+import SharedNotesComponent from './components/SharedNotesComponent';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/userui" element={ <Userlayout/>}/>
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
+        <Route exact path="/receivednotes" element={<SharedNotesComponent/>}/>
       </Routes>
     </Router>
     </NoteState>

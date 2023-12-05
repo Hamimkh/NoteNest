@@ -144,6 +144,16 @@ router.post("/sharenote/:id", fetchuser, async (req, res) => {
   }
 });
 
+// Route-5: Fetch shared using GET: "/api/notes/fetchsharednotes". Login required.
+router.get("/fetchsharednotes", fetchuser, async (req, res) => {
+  try {
+      const sharedNotes = await Share.find({ receiver_id: req.user.id }).populate("note_id");
+      res.json(sharedNotes);
+  } catch (error) {
+      console.error("Error fetching shared notes:", error);
+      res.status(500).json({ error: "Server error" });
+  }
+});
 
 
 module.exports = router;

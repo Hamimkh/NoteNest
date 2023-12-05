@@ -4,6 +4,7 @@ import { useState } from "react";
 const NoteState = (props) => {
   const notesInitial = [];
   const [notes, setNotes] = useState(notesInitial);
+  const [sharedNotes, setSharedNotes] = useState([]);
 
   // Get all Notes
   const getNotes = async () => {
@@ -104,10 +105,28 @@ const editNote = async (id, title, description) => {
       // Handle error
     }
   };
-  
+
+  // Fetch shared notes
+  const fetchSharedNotes = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/notes/fetchsharednotes`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": localStorage.getItem("authtoken")
+        }
+      });
+      const json = await response.json();
+      setSharedNotes(json);
+    } catch (error) {
+      console.error('Error fetching shared notes:', error);
+      // Handle error
+    }
+  }
+
 
 return (
-    <NoteContext.Provider value={{ notes, getNotes, addNote, editNote, deleteNote, shareNote }}>
+    <NoteContext.Provider value={{notes,getNotes,addNote,editNote,deleteNote,shareNote,fetchSharedNotes,setSharedNotes}}>
       {props.children}
     </NoteContext.Provider>
   )
