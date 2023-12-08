@@ -16,7 +16,7 @@ function Userui() {
       if (localStorage.getItem("authtoken")) {
         getNotes();
       } else {
-        navigate("/");
+        navigate("/login");
       }
     }, [getNotes, navigate]);
   

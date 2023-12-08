@@ -46,6 +46,10 @@ ul li {
     display: block;
 }
 
+.nav-links {
+  margin-top: 0.25rem;
+}
+
 .custom-btn:hover {
     background-color: rgb(86, 157, 16);
 }

@@ -116,17 +116,21 @@ const editNote = async (id, title, description) => {
           "auth-token": localStorage.getItem("authtoken")
         }
       });
+  
+      if (!response.ok) {
+        throw new Error(`Failed to fetch shared notes. Status: ${response.status}`);
+      }
+  
       const json = await response.json();
       setSharedNotes(json);
     } catch (error) {
-      console.error('Error fetching shared notes:', error);
-      // Handle error
+      console.error('Error fetching shared notes:', error.message);
+      // Handle error, e.g., show a user-friendly error message
     }
   }
 
-
 return (
-    <NoteContext.Provider value={{notes,getNotes,addNote,editNote,deleteNote,shareNote,fetchSharedNotes,setSharedNotes}}>
+    <NoteContext.Provider value={{notes,getNotes,addNote,editNote,deleteNote,shareNote,fetchSharedNotes,setSharedNotes,sharedNotes}}>
       {props.children}
     </NoteContext.Provider>
   )

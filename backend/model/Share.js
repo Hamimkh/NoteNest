@@ -1,24 +1,28 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const ShareSchema = new Schema({
+const ShareSchema = new Schema(
+  {
     sender_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
+  
     receiver_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     note_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "notes"
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Notes",
     },
     Sharenote: {
-        type: String,
-        required: true
-    }
-}, { timestamps: true });
+     title: String,
+     description: String,
+   },
+  },
+  { timestamps: true }
+);
 
-  const Share = mongoose.model('Shared-Note', ShareSchema);
-  module.exports = Share;
+const Share = mongoose.model("sharedNotes", ShareSchema);
+module.exports = Share;

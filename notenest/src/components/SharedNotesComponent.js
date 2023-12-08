@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
-import NoteState from '../context/notes/NoteContext';
-import SharedNoteItem from './SharedNoteItem';
+import NoteContext from "../context/notes/NoteContext";
 import { useNavigate } from 'react-router-dom';
 
 function SharedNotesComponent() {
-  const { fetchSharedNotes, sharedNotes } = useContext(NoteState);
+  const context = useContext(NoteContext);        
+  const { fetchSharedNotes, sharedNotes} = context;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,10 +16,14 @@ function SharedNotesComponent() {
   }, [fetchSharedNotes, navigate]);
 
   return (
-    <div>
-      {sharedNotes.map((sharedNote) => (
-        <SharedNoteItem key={sharedNote._id} sharedNote={sharedNote} />
-      ))}
+    <div className="display-container">
+        {sharedNotes.map((sharedNotes) => (
+           <div key={sharedNotes._id} className="card custom-card m-2" style={{ width: '12rem', height: '15rem' }}>
+            <h4 className="card-title mb-4 mx-2">{sharedNotes.Sharenote.title}</h4>
+            <p className="card-text mb-4 mx-2">{sharedNotes.Sharenote.description}</p>
+            <p className="card-text mb-4 mx-2">From: {sharedNotes.sender_username}</p>
+          </div>
+        ))}
     </div>
   );
 }

@@ -1,12 +1,11 @@
-// App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import Userlayout from './components/Userlayout';
-import NoteState from './context/notes/NoteContext';
-import SharedNotesComponent from './components/SharedNotesComponent';
+import NoteState from './context/notes/Notestate';
+import ReceivedNotes from './components/ReceivedNotes';
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
         <Route exact path="/userui" element={ <Userlayout/>}/>
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
-        <Route exact path="/receivednotes" element={<SharedNotesComponent/>}/>
+        <Route exact path="/receivednotes" element={<ReceivedNotes/>}/>
       </Routes>
     </Router>
     </NoteState>

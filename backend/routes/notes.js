@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Notes = require("../model/Notes");
 const User = require("../model/Users");
+const Share = require("../model/Share")
 const fetchuser = require("../middleware/fetchusers");
 const { body, validationResult } = require("express-validator");
 
@@ -118,25 +119,34 @@ router.post("/sharenote/:id", fetchuser, async (req, res) => {
 
     // Check if the note is owned by the logged-in user
     if (note.user.toString() !== req.user.id) {
-      return res
-        .status(401)
-        .json({ error: "Not allowed to share this note" });
+      return res.status(401).json({ error: "Not allowed to share this note" });
     }
 
-    // Find the user by email and add their ID to the note's sharedWith array
+    // Find the user by email
     const sharedUser = await User.findOne({ email });
+
     if (!sharedUser) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    note.sharedWith.push(sharedUser._id);
+    // Create a shared note entry in the Share model
+    const sharedNote = new Share({
+      sender_id: req.user.id,
+      sender_usernsme: req.user.usernsme,
+      receiver_id: sharedUser._id,
+      note_id: note._id,
+      Sharenote: {
+        title: note.title,
+        description: note.description,
+      },
+    });
 
-    // Save the updated note
-    await note.save();
+    // Save the shared note entry
+    await sharedNote.save();
 
     res.json({
       message: "Note shared successfully",
-      sharedWith: note.sharedWith,
+      sharedNote,
     });
   } catch (error) {
     console.error("Error sharing note:", error);
@@ -144,16 +154,21 @@ router.post("/sharenote/:id", fetchuser, async (req, res) => {
   }
 });
 
-// Route-5: Fetch shared using GET: "/api/notes/fetchsharednotes". Login required.
+
+// Route-6: Fetch shared using GET: "/api/notes/fetchsharednotes". Login required.
 router.get("/fetchsharednotes", fetchuser, async (req, res) => {
   try {
-      const sharedNotes = await Share.find({ receiver_id: req.user.id }).populate("note_id");
-      res.json(sharedNotes);
+    console.log("Fetching shared notes for user:", req.user.id);
+
+    // Find shared notes based on the receiver_id in the Share model
+    const sharedNotes = await Share.find({ receiver_id: req.user.id });
+    res.json(sharedNotes);
   } catch (error) {
-      console.error("Error fetching shared notes:", error);
-      res.status(500).json({ error: "Server error" });
+    console.error("Error fetching shared notes:", error);
+    res.status(500).json({ error: "Server error" });
   }
 });
+
 
 
 module.exports = router;

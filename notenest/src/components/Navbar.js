@@ -10,6 +10,7 @@ function Navbar() {
     localStorage.removeItem("authtoken");
     navigate("/")
   }
+  
   const toggleMenu = () => {
     const navLinks = document.getElementById("navLinks");
     const menuIcon = document.getElementById("menuIcon");
@@ -37,10 +38,10 @@ function Navbar() {
                     <li className="items"><Link to="/signup" className='custom-btn mx-2'>Signup</Link></li>
                     <li className="items"><Link to="/login" className='custom-btn mx-3'>Login</Link></li>  </ul> : <ul id="navLinks" className="nav-links mb-1">
                     <span id="closeIcon" className="close-icon" onClick={toggleMenu}>&times;</span>
-                    <li className="items"><Link to="/receivednotes" onClick={handleLogout} className='custom-btn mx-2'>Received notes</Link></li>
+                    <li className="items"><Link to="/userui" className='custom-btn mx-2'>My Notes</Link></li>
+                    <li className="items"><Link to="/receivednotes" className='custom-btn mx-2'>Received Notes</Link></li>
                     <li className="items"><Link onClick={handleLogout} className='custom-btn mx-2'>Logout</Link></li>
                     </ul>}
-               
             </div>
         </nav>
     </header>
