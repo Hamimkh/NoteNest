@@ -7,6 +7,11 @@ const ShareSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
+    sender_username: {
+      type: String,
+      ref: "User",
+    },
   
     receiver_id: {
       type: mongoose.Schema.Types.ObjectId,

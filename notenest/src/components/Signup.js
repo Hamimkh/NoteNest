@@ -26,9 +26,9 @@ function Signup(props) {
       // Save the auth token and redirect
       localStorage.setItem("authtoken", json.authToken);
       navigate('/userui');
-    }
-    if (!json.success) {
-      console.log('Errors:', json.errors);
+      props.showAlert("Account Created Successfully!", "success");
+    } else{
+      props.showAlert("Invald Credintials!", "danger");
     }
   };
 

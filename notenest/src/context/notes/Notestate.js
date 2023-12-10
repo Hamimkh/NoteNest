@@ -129,8 +129,32 @@ const editNote = async (id, title, description) => {
     }
   }
 
+  // Delete a Shared Note
+  const deleteSharedNote = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/notes/deletesharednote/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          "auth-token": localStorage.getItem("authtoken")
+        }
+      });
+
+      const json = await response.json();
+      console.log(json);
+
+      // Update sharedNotes state after successful deletion
+      setSharedNotes((prevSharedNotes) => prevSharedNotes.filter((sharedNote) => sharedNote._id !== id));
+    } catch (error) {
+      console.error('Error deleting shared note:', error);
+      // Handle error
+    }
+  };
+
+
+
 return (
-    <NoteContext.Provider value={{notes,getNotes,addNote,editNote,deleteNote,shareNote,fetchSharedNotes,setSharedNotes,sharedNotes}}>
+    <NoteContext.Provider value={{notes,getNotes,addNote,editNote,deleteNote,shareNote,fetchSharedNotes,setSharedNotes,sharedNotes,deleteSharedNote}}>
       {props.children}
     </NoteContext.Provider>
   )

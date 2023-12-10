@@ -35,7 +35,7 @@ code {
 }
 
 .display-container {
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   flex-wrap: wrap;
 }

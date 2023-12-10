@@ -132,7 +132,6 @@ router.post("/sharenote/:id", fetchuser, async (req, res) => {
     // Create a shared note entry in the Share model
     const sharedNote = new Share({
       sender_id: req.user.id,
-      sender_usernsme: req.user.usernsme,
       receiver_id: sharedUser._id,
       note_id: note._id,
       Sharenote: {
@@ -161,13 +160,39 @@ router.get("/fetchsharednotes", fetchuser, async (req, res) => {
     console.log("Fetching shared notes for user:", req.user.id);
 
     // Find shared notes based on the receiver_id in the Share model
-    const sharedNotes = await Share.find({ receiver_id: req.user.id });
+    const sharedNotes = await Share.find({ receiver_id: req.user.id })
+    .populate("sender_id", "username") // Populate the sender_id field with the username
+      .exec();
     res.json(sharedNotes);
   } catch (error) {
     console.error("Error fetching shared notes:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
+// Route-7: Delete shared note using DELETE: "/api/notes/deletesharednote/:id". Login required.
+router.delete("/deletesharednote/:id", fetchuser, async (req, res) => {
+  try {
+    const sharedNote = await Share.findById(req.params.id);
+
+    if (!sharedNote) {
+      return res.status(404).json({ error: "Shared note not found" });
+    }
+
+    // Check if the logged-in user is the receiver of the shared note
+    if (sharedNote.receiver_id.toString() !== req.user.id) {
+      return res.status(401).json({ error: "Not allowed to delete this shared note" });
+    }
+
+    await Share.findByIdAndDelete(req.params.id);
+
+    res.json({ message: "Shared note successfully deleted", sharedNote });
+  } catch (error) {
+    console.error("Error deleting shared note:", error);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
 
 
 

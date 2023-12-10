@@ -4,7 +4,7 @@ import './Authenticate.css';
 import { Link, useNavigate } from "react-router-dom";
 
 
-function Login() {
+function Login(props) {
   const [credintials, setCredintials] = useState({email:"", password:""});
   let navigate = useNavigate()
 
@@ -25,8 +25,10 @@ function Login() {
     if(json.success){
       // Save the auth token and redirect
       localStorage.setItem('authtoken', json.authToken);
+      props.showAlert("Logged In Successfully!", "success");
       navigate('/userui');
-
+    } else{
+      props.showAlert("Invald Credintials!", "danger");
     }
   }
   const handleChange = (e) => {

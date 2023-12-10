@@ -4,7 +4,7 @@ import Noteitems from "./Noteitems";
 import NoteContext from "../context/notes/NoteContext";
 import { useNavigate } from "react-router-dom";
 
-function Userui() {
+function Userui(props) {
     const context = useContext(NoteContext);
     const [note, setNote] = useState({ id: "", etitle: "", edescription: "" });
     const { notes, getNotes, editNote } = context;
@@ -28,15 +28,18 @@ function Userui() {
       const handleSubmit = (e) => {
         e.preventDefault();
         editNote(note.id, note.etitle, note.edescription, note.etag);
-        refClose.current.click(); 
+        refClose.current.click();
+        props.showAlert("Note Updated Successfully!", "success");
+ 
       };
       const handleChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value });
       };
 
   return (
+    <>
     <div className="display-container">
-      <Createnote />
+      <Createnote showAlert={props.showAlert}/>
       <button
         type="button"
         ref={ref}
@@ -102,9 +105,10 @@ function Userui() {
         </div>
       </div>
       {notes.map((note) => {
-        return <Noteitems key={note._id} updateNote={updateNote} note={note} />;
+        return <Noteitems key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert} />;
       })}
     </div>
+    </>
   );
 }
 
