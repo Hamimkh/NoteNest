@@ -22,7 +22,7 @@ function SharedNotesComponent(props) {
             <div style={{marginLeft: "5rem", marginTop: "0.5rem"}} ><i className="fa-solid fa-trash mx-2" onClick={()=>{deleteSharedNote(sharedNotes._id);  props.showAlert("Note Deleted Successfully!", "success");}}  style={{ cursor: 'pointer', color: 'red',}}/></div>
             <h4 className="card-title mb-4 mx-2" style={{marginTop: "0.6rem"}}>{sharedNotes.Sharenote.title}</h4>
             <p className="card-text mb-4 mx-2">{sharedNotes.Sharenote.description}</p>
-            <p style={{marginTop: "4rem"}} className="card-text mb-4 mx-2">From: {sharedNotes.sender_id.username}</p>
+            <p style={{marginTop: "2.5rem"}} className="card-text mb-4 mx-2">From: {sharedNotes.sender_id.username}</p>
           </div>
         ))}
     </div>

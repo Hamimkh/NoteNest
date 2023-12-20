@@ -165,7 +165,6 @@ router.get("/fetchsharednotes", fetchuser, async (req, res) => {
       .exec();
     res.json(sharedNotes);
   } catch (error) {
-    console.error("Error fetching shared notes:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
