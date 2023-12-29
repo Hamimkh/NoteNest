@@ -20,7 +20,7 @@ const NotesSchema = new Schema({
   sharedWith: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "users",
     },
   ],
     
@@ -30,4 +30,4 @@ const NotesSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Notes", NotesSchema);
+module.exports = mongoose.model("notes", NotesSchema);

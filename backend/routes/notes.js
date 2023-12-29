@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Notes = require("../model/Notes");
-const User = require("../model/Users");
+const User = require("../model/User");
 const Share = require("../model/Share")
 const fetchuser = require("../middleware/fetchusers");
 const { body, validationResult } = require("express-validator");
@@ -157,15 +157,14 @@ router.post("/sharenote/:id", fetchuser, async (req, res) => {
 // Route-6: Fetch shared using GET: "/api/notes/fetchsharednotes". Login required.
 router.get("/fetchsharednotes", fetchuser, async (req, res) => {
   try {
-    console.log("Fetching shared notes for user:", req.user.id);
-
     // Find shared notes based on the receiver_id in the Share model
     const sharedNotes = await Share.find({ receiver_id: req.user.id })
     .populate("sender_id", "username") // Populate the sender_id field with the username
       .exec();
     res.json(sharedNotes);
   } catch (error) {
-    res.status(500).json({ error: "Server error" });
+    console.error("Error fetching shared notes:", error);
+    res.status(500).json({ error: "Server error", details: error.message });
   }
 });
 
